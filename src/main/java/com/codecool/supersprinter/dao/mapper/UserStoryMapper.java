@@ -12,6 +12,7 @@ public class UserStoryMapper implements RowMapper<UserStory> {
     @Override
     public UserStory mapRow(ResultSet rs, int rowNum) throws SQLException {
         UserStory userStory = new UserStory();
+        userStory.setId(rs.getLong("id"));
         userStory.setTitle(rs.getString("story_title"));
         userStory.setUserStory(rs.getString("user_story"));
         userStory.setAcceptanceCriteria(rs.getString("acceptance_criteria"));
