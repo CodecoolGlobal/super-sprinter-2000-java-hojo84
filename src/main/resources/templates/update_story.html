@@ -8,7 +8,7 @@
 
 <h1>Update User Story</h1>
 
-<form th:action="@{/update/{storyId}(storyId=${story.getId()})}" method="post">
+<form th:action="@{/update/{storyId}(storyId=${story.getId()})}" th:object="${story}" method="post">
     <p>
         <label for="title">Story Title:</label><br>
         <input type="text" id="title" name="title" required minlength="5" maxlength="100"
@@ -31,14 +31,13 @@
     </p>
     <p>
         Status:<br>
-        <input list="statusOptions" name="status" th:value="${story.getStatus()}"/>
-        <datalist id="statusOptions">
-            <option value="planning">
-            <option value="todo">
-            <option value="in progress">
-            <option value="review">
-            <option value="done">
-        </datalist>
+        <select id="statusOptions" name="status" th:field="*{status}">
+            <option th:value="'planning'">planning</option>
+            <option th:value="'todo'">todo</option>
+            <option th:value="'in progress'">in progress</option>
+            <option th:value="'review'">review</option>
+            <option th:value="'done'">done</option>
+        </select>
     </p>
     <p>
         <button type="submit">Update User Story</button>
