@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update User Story | Super Sprinter 2000</title>
+</head>
+<body>
+
+<h1>Update User Story</h1>
+
+<form th:action="@{/update/{storyId}(storyId=${story.getId()})}" method="post">
+    <p>
+        <label for="title">Story Title:</label><br>
+        <input type="text" id="title" name="title" required minlength="5" maxlength="100"
+               th:value="${story.getTitle()}"/>
+    </p>
+    <p>
+        User Story:<br>
+        <textarea name="userStory" rows="4" cols="40" required maxlength="400"
+                  th:text="${story.getUserStory()}"></textarea>
+    </p>
+    <p>
+        Acceptance Criteria:<br>
+        <textarea name="acceptanceCriteria" rows="5" cols="40" required maxlength="400"
+                  th:text="${story.getAcceptanceCriteria()}"></textarea>
+    </p>
+    <p>
+        Business Value:<br>
+        <input type="number" required min="0.5" max="40" step="0.5" name="businessValue" size="3"
+               th:value="${story.getBusinessValue()}"/>
+    </p>
+    <p>
+        Status:<br>
+        <input list="statusOptions" name="status" th:value="${story.getStatus()}"/>
+        <datalist id="statusOptions">
+            <option value="planning">
+            <option value="todo">
+            <option value="in progress">
+            <option value="review">
+            <option value="done">
+        </datalist>
+    </p>
+    <p>
+        <button type="submit">Update User Story</button>
+    </p>
+</form>
+
+</body>
+</html>

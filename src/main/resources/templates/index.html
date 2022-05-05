@@ -30,7 +30,11 @@
     </tr>
     <tr th:each=" userStory : ${userStories}">
         <td th:text="${userStory.getId()}">Id</td>
-        <td th:text="${userStory.getTitle()}">Story Title</td>
+        <td>
+            <a th:href="@{/story/{storyId}(storyId=${userStory.getId()})}">
+                <span th:text="${userStory.getTitle()}">Story Title></span>
+            </a>
+        </td>
         <td th:text="${userStory.getUserStory()}">User Story</td>
         <td th:text="${userStory.getAcceptanceCriteria()}">Acceptance Criteria</td>
         <td th:text="${userStory.getBusinessValue()}">Business Value</td>

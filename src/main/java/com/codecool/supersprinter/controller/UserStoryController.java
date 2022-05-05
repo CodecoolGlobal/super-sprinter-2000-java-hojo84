@@ -5,10 +5,7 @@ import com.codecool.supersprinter.service.UserStoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/")
@@ -37,6 +34,23 @@ public class UserStoryController {
                                   @RequestParam(name = "acceptanceCriteria") String acceptanceCriteria,
                                   @RequestParam(name = "businessValue") double businessValue) {
         userStoryService.addUserStory(title, userStory, acceptanceCriteria, businessValue);
+        return "redirect:/";
+    }
+
+    @GetMapping("/story/{id}")
+    public String getUserStoryById(@PathVariable long id, Model model) {
+        UserStory userStory = userStoryService.getUserStoryById(id);
+        model.addAttribute("story", userStory);
+        return "update_story";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateUserStory(@PathVariable long id, @RequestParam(name = "title") String title,
+                                  @RequestParam(name = "userStory") String userStory,
+                                  @RequestParam(name = "acceptanceCriteria") String acceptanceCriteria,
+                                  @RequestParam(name = "businessValue") double businessValue,
+                                  @RequestParam(name = "status") String status) {
+        userStoryService.updateUserStory(id, title, userStory, acceptanceCriteria, businessValue, status);
         return "redirect:/";
     }
 }
