@@ -32,13 +32,7 @@ public class UserStoryService {
         return userStoryDaoJdbc.getUserStoryById(id).orElseThrow();
     }
 
-    public void updateUserStory(long id, String title, String userStory, String acceptanceCriteria, double businessValue, String status) {
-        UserStory storyToBeUpdated = getUserStoryById(id);
-        storyToBeUpdated.setTitle(title);
-        storyToBeUpdated.setUserStory(userStory);
-        storyToBeUpdated.setAcceptanceCriteria(acceptanceCriteria);
-        storyToBeUpdated.setBusinessValue(businessValue);
-        storyToBeUpdated.setStatus(status);
-        userStoryDaoJdbc.updateUserStory(storyToBeUpdated, id);
+    public void updateUserStory(long id, UserStory userStory) {
+        userStoryDaoJdbc.updateUserStory(userStory, id);
     }
 }

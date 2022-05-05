@@ -5,7 +5,10 @@ import com.codecool.supersprinter.service.UserStoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/")
@@ -45,12 +48,12 @@ public class UserStoryController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateUserStory(@PathVariable long id, @RequestParam(name = "title") String title,
-                                  @RequestParam(name = "userStory") String userStory,
-                                  @RequestParam(name = "acceptanceCriteria") String acceptanceCriteria,
-                                  @RequestParam(name = "businessValue") double businessValue,
-                                  @RequestParam(name = "status") String status) {
-        userStoryService.updateUserStory(id, title, userStory, acceptanceCriteria, businessValue, status);
+    public String updateUserStory(@PathVariable long id, @Valid UserStory userStory, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("story", userStory);
+            return "update_story";
+        }
+        userStoryService.updateUserStory(id, userStory);
         return "redirect:/";
     }
 }
