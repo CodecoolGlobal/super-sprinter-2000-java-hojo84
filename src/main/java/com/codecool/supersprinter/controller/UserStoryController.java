@@ -36,12 +36,7 @@ public class UserStoryController {
     public String addNewUserStory(@RequestParam(name = "title") String title, @RequestParam(name = "userStory") String userStory,
                                   @RequestParam(name = "acceptanceCriteria") String acceptanceCriteria,
                                   @RequestParam(name = "businessValue") double businessValue) {
-        UserStory newUserStory = new UserStory();
-        newUserStory.setTitle(title);
-        newUserStory.setUserStory(userStory);
-        newUserStory.setAcceptanceCriteria(acceptanceCriteria);
-        newUserStory.setBusinessValue(businessValue);
-        userStoryService.addUserStory(newUserStory);
+        userStoryService.addUserStory(title, userStory, acceptanceCriteria, businessValue);
         return "redirect:/";
     }
 }

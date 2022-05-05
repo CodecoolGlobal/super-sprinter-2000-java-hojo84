@@ -17,8 +17,11 @@ public class UserStoryService {
         this.userStoryDaoJdbc = userStoryDaoJdbc;
     }
 
-    public void addUserStory(UserStory userStory) {
-        userStoryDaoJdbc.addUserStory(userStory);
+    public void addUserStory(String title, String userStory, String acceptanceCriteria, double businessValue) {
+        UserStory newUserStory = new UserStory(title, userStory, acceptanceCriteria, businessValue);
+        final String defaultStatus = "planning";
+        newUserStory.setStatus(defaultStatus);
+        userStoryDaoJdbc.addUserStory(newUserStory);
     }
 
     public List<UserStory> getAllUserStories() {
